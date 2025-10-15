@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuPin - Smart Document Bookmarks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo-left">
+                    <svg class="logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Document background -->
+                        <rect x="10" y="8" width="24" height="32" rx="2" fill="white" opacity="0.95"/>
+                        <!-- Document lines -->
+                        <line x1="14" y1="14" x2="26" y2="14" stroke="#4b6cb7" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="18" x2="28" y2="18" stroke="#4b6cb7" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="14" y1="22" x2="24" y2="22" stroke="#4b6cb7" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Pin -->
+                        <circle cx="30" cy="12" r="6" fill="#fbbf24"/>
+                        <path d="M30 18 L30 26" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="30" cy="12" r="4" fill="#f59e0b"/>
+                        <circle cx="30" cy="11" r="2" fill="#fef3c7"/>
+                    </svg>
+                </div>
+                <div class="header-right">
+                    <div class="title-container">
+                        <h1 class="title">DocuPin</h1>
+                        <span class="ai-badge">✨ AI-Powered</span>
+                    </div>
+                    <p class="subtitle">Save anything. Find everything. Powered by NLP.</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Add Link Section -->
+            <section class="add-section">
+                <h3 class="section-title">
+                    <i class="fas fa-plus-circle"></i> Add New Bookmark
+                </h3>
+                <div class="input-container">
+                    <input type="url" id="linkInput" placeholder="🔗 Paste your document link here..." />
+                    <button id="addButton" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Bookmark
+                    </button>
+                </div>
+                <div class="title-input-container">
+                    <input type="text" id="titleInput" placeholder="✏️ Optional title (auto-detects if empty)" />
+                    <small class="input-help">Add a custom title for better search results</small>
+                </div>
+                <div class="tags-input-container">
+                    <input type="text" id="tagsInput" placeholder="🏷️ Add tags (comma-separated: project-alpha, backend, api)" />
+                    <small class="input-help">Tags help organize and find related documents</small>
+                </div>
+                <div id="linkPreview" class="link-preview hidden"></div>
+            </section>
+
+            <!-- Stats Dashboard -->
+            <section class="stats-section">
+                <div class="stats-grid" id="statsGrid">
+                    <!-- Stats will be rendered here -->
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-search"></i> ✨ Search & Filter
+                    </h3>
+                    <div class="view-controls">
+                        <button class="view-toggle" id="compactToggle" title="Toggle compact view">
+                            <i class="fas fa-th-list"></i> Compact
+                        </button>
+                        <button class="view-toggle" id="groupToggle" title="Toggle group by tags">
+                            <i class="fas fa-layer-group"></i> Group
+                        </button>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="✨ Search your bookmarks with AI-powered natural language..." />
+                </div>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="quip">Quip</button>
+                    <button class="filter-btn" data-filter="google">Google Docs</button>
+                    <button class="filter-btn" data-filter="confluence">Confluence</button>
+                    <button class="filter-btn" data-filter="other">Other</button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-bookmark"></i> Your Bookmarks
+                    </h3>
+                    <span class="results-count" id="resultsCount"></span>
+                </div>
+                <div id="bookmarksList" class="bookmarks-list">
+                    <div class="empty-state">
+                        <img src="bookmark-illustration.svg" alt="Bookmark" />
+                        <h2>No bookmarks yet</h2>
+                        <p>Paste your first link above to get started.</p>
+                    </div>
+                </div>
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="pagination-btn" id="loadMore">
+                        <i class="fas fa-chevron-down"></i> Load More
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>🚀 Built with ❤️ at TPM Hackathon 2025 · DocuPin v1.0</p>
+        </footer>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="spinner"></div>
+            <p>Processing document...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

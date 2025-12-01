@@ -550,3 +550,5 @@ open index.html
 - "Is it secure?" → Yes, data never leaves browser
 - "Will you monetize?" → Open source first, enterprise features later
 
+
+
